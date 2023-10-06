@@ -7,7 +7,7 @@ const Header = () => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container">
+      <div className="container-md">
         <div className="collapse navbar-collapse" id="navbarButtonsExample">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
@@ -15,6 +15,11 @@ const Header = () => {
                 All Galeries
               </Link>
             </li>
+            {user && <li className="nav-item">
+              <Link className="nav-link" to="/create">
+                Create Gallery
+              </Link>
+            </li>}
           </ul>
 
           <div className="d-flex align-items-center">
