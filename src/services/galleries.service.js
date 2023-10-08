@@ -1,11 +1,11 @@
 import HttpService from "./http.service";
 
 export default class Galleries {
-  static async getAll(take = 10, skip = 0, search = "") {
+  static async getAll(take = 10, skip = 0, field = "", query = "") {
     return await HttpService.request({
       url: "/galleries",
       method: "GET",
-      params: { take, skip, search },
+      params: { take, skip, field, query },
     });
   }
   static async get(id) {

@@ -15,11 +15,18 @@ const Header = () => {
                 All Galeries
               </Link>
             </li>
-            {user && <li className="nav-item">
-              <Link className="nav-link" to="/create">
+            {user && <><li className="nav-item">
+            <Link className="nav-link" to="/create">
                 Create Gallery
               </Link>
-            </li>}
+              </li>
+              <li className="nav-item">
+              <Link className="nav-link" to="/mygalleries">
+                MyGalleries
+              </Link>
+              </li>
+              </>
+            }
           </ul>
 
           <div className="d-flex align-items-center">

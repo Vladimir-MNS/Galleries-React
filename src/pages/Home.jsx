@@ -1,6 +1,10 @@
 import AppGalleries from "../components/AppGalleries";
+import SearchButton from "../components/SearchButton";
 const Home = () => {
-    return <><AppGalleries /></>
+    return <>
+          
+    <SearchButton />
+    <AppGalleries /></>
 }
 
 export default Home;
