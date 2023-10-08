@@ -126,6 +126,13 @@ const AddGallery = () => {
                   type="submit">
                   Submit
                 </button>
+                <button
+                  className="btn btn-primary btn-lg btn-block"
+                  type="button"
+                  onClick={()=>navigate("/")}>
+                  Cancel
+                </button>
+
                 {validationErrors && (
                   <div className="alert alert-danger">{validationErrors}</div>
                 )}
