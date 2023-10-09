@@ -1,10 +1,13 @@
-import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Galleries from "../services/galleries.service";
 import userContext from "../context/UserContext";
 
-const AddGallery = () => {
+const EditGallery = () => {
   const { user } = useContext(userContext);
+  const { id } = useParams();
+
+  console.log(id);
 
   const [newGallery, setNewGallery] = useState({
     name: "",
@@ -13,9 +16,31 @@ const AddGallery = () => {
     user_id: user.id,
   });
 
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchData = async () => {
+      try {
+        const { data } = await Galleries.get(id);
+
+        if (isMounted) {
+          setNewGallery(data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [id]);
+
   const [validationErrors, setValidationErrors] = useState("");
 
-  const [urlInputs, setUrlInputs] = useState([1]);
+  const [urlInputs, setUrlInputs] = useState([newGallery.images.length]);
 
   const navigate = useNavigate();
 
@@ -24,8 +49,6 @@ const AddGallery = () => {
   };
 
   const handleInputChange = (e, index) => {
-
-
     const { name, value, type } = e.target;
 
     const updatedImages = [...newGallery.images];
@@ -44,9 +67,15 @@ const AddGallery = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const updatedData = {
+      name: newGallery.name,
+      description: newGallery.description,
+      images: newGallery.images,
+    };
+
     try {
-      const response = await Galleries.create(newGallery);
-      navigate("/");
+      const response = await Galleries.update(updatedData, parseInt(id));
+      navigate(`/galleries/${id}`);
     } catch (error) {
       setValidationErrors(error.response?.data?.message);
     }
@@ -62,7 +91,7 @@ const AddGallery = () => {
           <div className="card shadow-2-strong">
             <div className="card-body p-5 text-center">
               <form onSubmit={handleSubmit}>
-                <h3 className="mb-5">Create your Gallery</h3>
+                <h3 className="mb-5">Update your gallery</h3>
 
                 <div className="form-outline mb-4">
                   <input
@@ -88,32 +117,34 @@ const AddGallery = () => {
                   <div className="form-outline mb-4">
                     <input
                       type="url"
-                      name={`image${urlInput}`}
+                      name={`image ${urlInput}`}
                       className="form-control form-control-lg"
                       value={newGallery.images[urlInput - 1]}
                       onChange={(e) => handleInputChange(e, index)}
                     />
                     <label className="form-label">Image {urlInput}</label>
-                    {index!=0 &&<button
-                      type="button"
-                      onClick={() =>
-                        setUrlInputs((prevValue) =>
-                          prevValue.filter((element) => element != urlInput)
-                        )
-                      }>
-                      Delete
-                    </button>}
+                    {index != 0 && (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setUrlInputs((prevValue) =>
+                            prevValue.filter((element) => element != urlInput)
+                          )
+                        }>
+                        Delete
+                      </button>
+                    )}
                     <button
                       type="button"
-                    onClick={(index) => {
+                      onClick={(index) => {
                         if (index > 0) {
                           const updatedInputs = [...urlInputs];
                           const temp = updatedInputs[index];
                           updatedInputs[index] = updatedInputs[index - 1];
                           updatedInputs[index - 1] = temp;
                           return setUrlInputs(updatedInputs);
-                        }}}
-                    >
+                        }
+                      }}>
                       MoveUp
                     </button>
                   </div>
@@ -131,7 +162,7 @@ const AddGallery = () => {
                 <button
                   className="btn btn-primary btn-lg btn-block"
                   type="button"
-                  onClick={()=>navigate("/")}>
+                  onClick={() => navigate("/")}>
                   Cancel
                 </button>
 
@@ -147,4 +178,4 @@ const AddGallery = () => {
   );
 };
 
-export default AddGallery;
+export default EditGallery;

@@ -8,6 +8,7 @@ import AddGallery from "./pages/AddGallery";
 import MyGalleries from "./pages/MyGalleries";
 import SingleGallery from "./pages/SingleGallery";
 import AuthorGalleries from "./pages/AuthorGalleries";
+import EditGallery from "./pages/EditGallery";
 
 const Router = () => {
   return (
@@ -19,6 +20,7 @@ const Router = () => {
 
       <Route path="/" element={<PrivateRouter />}>
         <Route path="/create" element={<AddGallery />} />
+        <Route path="/edit-gallery/:id" element={<EditGallery />} />
         <Route path="/mygalleries" element={<MyGalleries />} />
       </Route>
 

@@ -21,11 +21,19 @@ export default class Galleries {
       data,
     });
   }
-  static async update(id, data) {
+  static async update(data, id) {
     return await HttpService.request({
       url: `/galleries/${id}`,
       method: "PUT",
       data,
     });
   }
+
+  static async delete(id) {
+    return await HttpService.request({
+      url: `/galleries/${id}`,
+      method: "DELETE",
+    });
+  }
+
 }
