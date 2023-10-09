@@ -15,14 +15,8 @@ function* galleriesHandler() {
 
 function* searchGalleriesHandler(action) {
   try {
-    const { take, skip, field, query } = action.payload;
-    console.log(take)
-    console.log(skip)
-    console.log(field)
-    console.log(query)
+    const { take, skip, field, query} = action.payload;
     const { data } = yield call(GalleriesService.getAll, take, skip, field, query);
-    console.log("data from saga");
-    console.log(data);
     yield put(setGalleries(data));
   } catch (error) {
     console.log(error);

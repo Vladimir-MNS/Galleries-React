@@ -52,9 +52,6 @@ const AddGallery = () => {
     }
   };
 
-  console.log(newGallery);
-  let error = "";
-
   return (
     <div className="container py-5 h-100">
       <div className="row d-flex justify-content-center align-items-center h-100">
@@ -88,19 +85,19 @@ const AddGallery = () => {
                   <div className="form-outline mb-4">
                     <input
                       type="url"
-                      name={`image${urlInput}`}
+                      name={`image ${urlInput}`}
                       className="form-control form-control-lg"
                       value={newGallery.images[urlInput - 1]}
                       onChange={(e) => handleInputChange(e, index)}
                     />
-                    <label className="form-label">Image {urlInput}</label>
+                    <label style={{ marginRight:"5px" }} className="form-label">Image</label>
                     {index!==0 &&<button
                       type="button"
                       className="btn btn-danger"
-                      onClick={() =>
+                      onClick={() => {
                         setUrlInputs((prevValue) =>
                           prevValue.filter((element) => element !== urlInput)
-                        )
+                        )}
                       }>
                       Delete
                     </button>}
