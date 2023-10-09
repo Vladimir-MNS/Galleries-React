@@ -94,16 +94,17 @@ const AddGallery = () => {
                       onChange={(e) => handleInputChange(e, index)}
                     />
                     <label className="form-label">Image {urlInput}</label>
-                    {index!=0 &&<button
+                    {index!==0 &&<button
                       type="button"
+                      className="btn btn-danger"
                       onClick={() =>
                         setUrlInputs((prevValue) =>
-                          prevValue.filter((element) => element != urlInput)
+                          prevValue.filter((element) => element !== urlInput)
                         )
                       }>
                       Delete
                     </button>}
-                    <button
+                    {/* <button
                       type="button"
                     onClick={(index) => {
                         if (index > 0) {
@@ -115,21 +116,21 @@ const AddGallery = () => {
                         }}}
                     >
                       MoveUp
-                    </button>
+                    </button> */}
                   </div>
                 ))}
 
-                <button type="button" onClick={addImageField}>
+                <button style={{marginBottom:'10px'}}type="button" className="btn btn-light" onClick={addImageField}>
                   Add Another Image
                 </button>
-
-                <button
-                  className="btn btn-primary btn-lg btn-block"
+                    <br></br>
+                <button style={{marginRight:'5px'}}
+                  className="btn btn-success"
                   type="submit">
                   Submit
                 </button>
-                <button
-                  className="btn btn-primary btn-lg btn-block"
+                <button style={{marginLeft:'5px'}}
+                  className="btn btn-warning"
                   type="button"
                   onClick={()=>navigate("/")}>
                   Cancel

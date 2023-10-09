@@ -1,11 +1,10 @@
-import "./../styles/card.style.css";
 import GalleryCard from "./GalleryCard";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGalleriesValue } from "../store/galleries/selectors";
 import { searchAllGalleries } from "../store/galleries/slice";
-import SearchButton from "./SearchButton";
 import { useParams } from "react-router-dom";
+import "../styles/spinner.style.css"
 
 const AppGalleries = ({userId}) => {
 
@@ -30,6 +29,16 @@ const AppGalleries = ({userId}) => {
     };
     fetchGalleries();
   }, [take]);
+
+
+  if (galleries.length === 0) {
+    return <div className="loading-spinner">
+    <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  </div>
+  }
+
 
   return (
     <div className="container-md">

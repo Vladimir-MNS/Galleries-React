@@ -5,13 +5,19 @@ import { useContext } from "react";
 const Header = () => {
   const { user, logout } = useContext(userContext);
 
+
+  const reloadHomePage = () => {
+      window.location.href = "/"
+    };
+
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-md">
         <div className="collapse navbar-collapse" id="navbarButtonsExample">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link" to="/">
+              <Link className="nav-link" to="/" onClick={reloadHomePage} >
                 All Galeries
               </Link>
             </li>

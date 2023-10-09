@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Comments from "../services/comments.service";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext } from "react";
@@ -26,7 +26,7 @@ const AddComment = ({ galleryId }) => {
     e.preventDefault();
     try {
       const response = await Comments.create(newComment);
-      navigate("/");
+      window.location.reload();
     } catch (error) {
       setValidationErrors(error.response?.data?.message);
     }
