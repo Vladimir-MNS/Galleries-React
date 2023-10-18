@@ -90,7 +90,7 @@ const AddGallery = () => {
                       value={newGallery.images[urlInput - 1]}
                       onChange={(e) => handleInputChange(e, index)}
                     />
-                    <label style={{ marginRight:"5px" }} className="form-label">Image</label>
+                    <label style={{ marginRight:"5px" }} className="form-label">Image URL</label>
                     {index!==0 &&<button
                       type="button"
                       className="btn btn-danger"
@@ -101,19 +101,6 @@ const AddGallery = () => {
                       }>
                       Delete
                     </button>}
-                    {/* <button
-                      type="button"
-                    onClick={(index) => {
-                        if (index > 0) {
-                          const updatedInputs = [...urlInputs];
-                          const temp = updatedInputs[index];
-                          updatedInputs[index] = updatedInputs[index - 1];
-                          updatedInputs[index - 1] = temp;
-                          return setUrlInputs(updatedInputs);
-                        }}}
-                    >
-                      MoveUp
-                    </button> */}
                   </div>
                 ))}
 

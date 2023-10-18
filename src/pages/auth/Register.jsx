@@ -23,7 +23,6 @@ const Register = () => {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('submit button clicked');
 
     try {
       setIsLoading(true);
@@ -135,7 +134,7 @@ const Register = () => {
                   </label>
                 </div>
 
-                <div class="form-check d-flex justify-content-center mb-5">
+                <div className="form-check d-flex justify-content-center mb-5">
                     <input required class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
                     <label class="form-check-label" for="form2Example3">
                       I agree all statements in Terms of service

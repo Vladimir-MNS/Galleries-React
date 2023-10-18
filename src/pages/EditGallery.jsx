@@ -7,14 +7,14 @@ const EditGallery = () => {
   const { user } = useContext(userContext);
   const { id } = useParams();
 
-  console.log(id);
-
   const [newGallery, setNewGallery] = useState({
     name: "",
     description: "",
     images: [],
     user_id: user.id,
   });
+
+  const [urlInputs, setUrlInputs] = useState([]);
 
   useEffect(() => {
     let isMounted = true;
@@ -25,6 +25,7 @@ const EditGallery = () => {
 
         if (isMounted) {
           setNewGallery(data);
+          setUrlInputs(newGallery.images)
         }
       } catch (error) {
         console.error(error);
@@ -40,12 +41,11 @@ const EditGallery = () => {
 
   const [validationErrors, setValidationErrors] = useState("");
 
-  const [urlInputs, setUrlInputs] = useState([newGallery.images.length]);
 
   const navigate = useNavigate();
 
   const addImageField = () => {
-    setUrlInputs((prevFields) => [...prevFields, prevFields.length + 1]);
+    setUrlInputs((prevFields) => [...prevFields, prevFields.length]);
   };
 
   const handleInputChange = (e, index) => {
@@ -81,9 +81,6 @@ const EditGallery = () => {
     }
   };
 
-  console.log(newGallery);
-  let error = "";
-
   return (
     <div className="container py-5 h-100">
       <div className="row d-flex justify-content-center align-items-center h-100">
@@ -114,53 +111,42 @@ const EditGallery = () => {
                   <label className="form-label">Gallery Description</label>
                 </div>
                 {urlInputs.map((urlInput, index) => (
-                  <div className="form-outline mb-4">
+                  <div key={index}className="form-outline mb-4">
                     <input
                       type="url"
-                      name={`image ${urlInput}`}
+                      name={`image ${index + 1}`}
                       className="form-control form-control-lg"
-                      value={newGallery.images[urlInput - 1]}
+                      value={newGallery.images[index]}
                       onChange={(e) => handleInputChange(e, index)}
                     />
-                    <label className="form-label">Image {urlInput}</label>
-                    {index != 0 && (
+                    <label style={{ marginRight:"5px" }} className="form-label">Image URL</label>
+                    {index !== 0 && (
                       <button
                         type="button"
+                        className="btn btn-danger"
                         onClick={() =>
                           setUrlInputs((prevValue) =>
-                            prevValue.filter((element) => element != urlInput)
+                            prevValue.filter((element) => element !== urlInput)
                           )
                         }>
                         Delete
                       </button>
                     )}
-                    <button
-                      type="button"
-                      onClick={(index) => {
-                        if (index > 0) {
-                          const updatedInputs = [...urlInputs];
-                          const temp = updatedInputs[index];
-                          updatedInputs[index] = updatedInputs[index - 1];
-                          updatedInputs[index - 1] = temp;
-                          return setUrlInputs(updatedInputs);
-                        }
-                      }}>
-                      MoveUp
-                    </button>
                   </div>
                 ))}
 
-                <button type="button" onClick={addImageField}>
+                <button style={{marginBottom:'10px'}}type="button" className="btn btn-light" onClick={addImageField}>
                   Add Another Image
                 </button>
-
+                <br></br>
                 <button
-                  className="btn btn-primary btn-lg btn-block"
+                  style={{marginRight:'5px'}}
+                  className="btn btn-success"
                   type="submit">
                   Submit
                 </button>
                 <button
-                  className="btn btn-primary btn-lg btn-block"
+                  className="btn btn-warning"
                   type="button"
                   onClick={() => navigate("/")}>
                   Cancel

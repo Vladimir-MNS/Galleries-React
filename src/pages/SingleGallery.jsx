@@ -46,8 +46,6 @@ const SingleGallery = () => {
     navigate("/mygalleries");
   };
 
-  console.log(gallery);
-
   const formattedDate = (str, outputFormat = "yyyy-MM-dd HH:mm:ss") => {
     const parsedDate = parseISO(str);
     const formattedDate = format(parsedDate, outputFormat);
@@ -57,8 +55,8 @@ const SingleGallery = () => {
   if (Object.keys(gallery).length === 0) {
     return (
       <div className="loading-spinner">
-        <div class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
+        <div className="spinner-border" role="status">
+          <span className="sr-only">Loading...</span>
         </div>
       </div>
     );

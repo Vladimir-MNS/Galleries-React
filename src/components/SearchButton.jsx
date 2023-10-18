@@ -25,20 +25,18 @@ const SearchButton = () => {
     navigate("/search");
   };
 
-  console.log(searchQuery);
-
   return (
     <div className="container py-5 h-100">
       <div className="row d-flex justify-content-center align-items-center h-100">
         <div className="col-12 col-md-8 col-lg-6 col-xl-5">
           <div className="card shadow-2-strong">
             <div className="card-body p-5 text-center">
-              <form class="form-inline mr-auto" onSubmit={handleSubmit}>
+              <form className="form-inline mr-auto" onSubmit={handleSubmit}>
               <div className="form-outline mb-4">
                 <input
                   onChange={handleInputChange}
                   name="query"
-                  class="form-control"
+                  className="form-control"
                   type="text"
                   placeholder="Type in your search..."
                   required
@@ -48,7 +46,7 @@ const SearchButton = () => {
                 <select
                   onChange={handleInputChange}
                   name="field"
-                  class="form-select form-select-lg mb-3"
+                  className="form-select form-select-lg mb-3"
                   required>
                   <option>Select Search criteria</option>
                   <option value="Name">Name</option>
@@ -57,7 +55,7 @@ const SearchButton = () => {
                 </select>
                 </div>
                 <div className="form-outline mb-4">
-                <button class="btn btn-primary me-3" type="submit">
+                <button className="btn btn-primary me-3" type="submit">
                   Search
                 </button>
                 </div>

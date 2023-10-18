@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Comments from "../services/comments.service";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import userContext from "../context/UserContext";
 
-const AddComment = ({ galleryId }) => {
+const AddComment = () => {
   const { user } = useContext(userContext);
   const [validationErrors, setValidationErrors] = useState('')
   const {id} = useParams();
@@ -14,8 +14,6 @@ const AddComment = ({ galleryId }) => {
     gallery_id: parseInt(id),
     author: `${user.first_name} ${user.last_name}`,
   });
-
-  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

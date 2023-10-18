@@ -40,8 +40,8 @@ const AppGalleries = ({ userId }) => {
 
   if (galleries.length === 0) {
     return (showSpinner ? <div className="loading-spinner">
-    <div class="spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
+    <div className="spinner-border" role="status">
+    <span className="sr-only">Loading...</span>
   </div>
   </div> :  <div className="container-md">
         <div className="row">

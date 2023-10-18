@@ -20,7 +20,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submit button clicked");
 
     try {
       setIsLoading(true);
@@ -76,7 +75,8 @@ const Login = () => {
 
                 <button
                   className="btn btn-primary btn-lg btn-block"
-                  type="submit">
+                  type="submit"
+                  disabled={isLoading}>
                   Login
                 </button>
                 {error && <div className="alert alert-danger mt-5">{error}</div>}
